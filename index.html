@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Analyzepro</title>
+
+  <!-- Local chessboard CSS -->
+  <link rel="stylesheet" href="main/chessboard-1.0.0.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  
+   <link rel="stylesheet" href="eval/eval-bar.css">
+  
+
+  
+</head>
+
+<body>
+
+<h2>Analyze Pro</h2><div id="menuButton" onclick="toggleMenu()">☰</div><div id="sideMenu">
+  <button onclick="closeMenu()">✕</button>
+
+  <button id="chesscomBtn">Chess.com</button>
+  <button id="lichessBtn">Lichess</button>
+
+  <button onclick="toggleThemeMenu()">Theme ▼</button>
+
+  <div id="themeOptions" style="display:none;">
+    <button onclick="setBoardTheme('#f0d9b5','#b58863')">Classic</button>
+    <button onclick="setBoardTheme('#dee3e6','#8ca2ad')">Blue</button>
+    
+    <button onclick="setBoardTheme('#292f3b','#656e7f')">Space</button>
+    
+    <button onclick="setBoardTheme('#eeeed2','#769656')">Green</button>
+    <button onclick="setBoardTheme('#666','#333')">Dark(default)</button>
+  </div>
+
+  <button onclick="importPGN()">Import PGN</button>
+  
+  <button onclick="reviewGame()">Analyze Game</button>
+</div>
+
+
+
+</div>
+<div id="pgnBar"></div>
+
+<div id="boardWrap">
+  <div id="evalContainer">
+    <div id="evalFill"></div>
+    <div id="evalText">0.0</div>
+  </div>
+
+  <div id="board"></div>
+</div>
+
+<div id="promotionPopup" style="display:none; position:absolute; background:white; padding:10px; border-radius:8px;">
+  <img src="img/wQ.png" data-piece="q">
+  <img src="img/wR.png" data-piece="r">
+  <img src="img/wB.png" data-piece="b">
+  <img src="img/wN.png" data-piece="n">
+</div>
+
+
+
+<div id="evalBar">0.00</div>
+
+<div id="depthControl">
+  <span>Depth:</span>
+  <input
+    type="range"
+    id="depthSlider"
+    min="4"
+    max="12"
+    value="8"
+    step="1"
+    oninput="setDepth(this.value)"
+  >
+  <span id="depthValue">8</span>
+</div>
+<div id="controls">
+  <button onclick="goStart()">⏮</button>
+  <button onclick="goPrev()">◀</button>
+  <button onclick="playGame()">▶</button>
+  <button onclick="goNext()">▶</button>
+  <button onclick="goEnd()">⏭</button>
+  <button onclick="flipBoard()">🔄</button>
+</div>
+
+<!-----
+<div id="accuracyBar">
+  <div class="accBox whiteSide">
+    <span>White</span>
+    <span id="whiteAccuracy">--%</span>
+  </div>
+
+  <div class="accBox blackSide">
+    <span>Black</span>
+    <span id="blackAccuracy">--%</span>
+  </div>
+</div>
+>
+
+
+<!-- revuewgraph -->
+<div id="reviewGraphWrap">
+  <canvas id="reviewGraph"></canvas>
+</div>
+
+</body>
+<!-- jQuery (still needed) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Local chessboard.js -->
+<script src="main/chessboard-1.0.0.min.js"></script>
+
+<!-- chess.js (cloud) -->
+<script src="main/chess.min.js"></script>
+<!--game logic-->
+<script src="game.logic.js"></script>
+<!--pgn.logic-->
+<script src="pgn.logic.js"></script>
+<!--controls.logic-->
+<script src="controls.js"></script>
+<!--pgn.imp-->
+<script src="imp.pgn/pgn.imp.js"></script>
+
+<script src="eval/eval.js"></script>
+
+<script src="imp.pgn/basic.js"></script>
+
+<script src="review/review.js"></script>
+
+<script src="review/review-graph.js"></script>
+<script>
+
+</script>
+
+<script>
+  
+  function setBoardTheme(light, dark) {
+  document.documentElement.style.setProperty("--light-square", light);
+  document.documentElement.style.setProperty("--dark-square", dark);
+}
+  
+  function toggleThemeMenu() {
+  const menu = document.getElementById("themeOptions");
+
+  if (menu.style.display === "none") {
+    menu.style.display = "flex";
+    menu.style.flexDirection = "column";
+    menu.style.gap = "8px";
+  } else {
+    menu.style.display = "none";
+  }
+}
+  
+</script>
+</html>
